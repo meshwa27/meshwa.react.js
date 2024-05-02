@@ -3,9 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Slider(Auto)</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body
+        {
+            overflow: hidden;
+        }
+        .back
+        {
+            height: 100%;
+            width: 100%;
+            background-color: black;
+            position: absolute;
+            filter: blur(50px);
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+        .slide
+        {
+            position: relative;
+        }
+
+        h1 {
+            font-size: 35px;
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+            position: relative;
+            color: #ffffff;
+            width: 35%;
+            margin: 20px auto;
+            border-bottom: 5px solid white;
+        }
+
+        .slider {
+            height: 70vh;
+            width: 60%;
+            position: relative;
+            margin: auto;
+            border: 5px solid white;
+        }
+        
+        
+
+        img {
+            height: 100%;
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
-    <h1>meshwa patel</h1>
+    <div class="back">
+
+    </div>
+    <div class="slide">
+        <h1>Auto Slider (Using JavaScript)</h1>
+    <div class="back"></div>
+    <div class="slider">
+        <img src="" alt="">
+    </div>
+    </div>
+
+    <script>
+        let arr = [
+            "images/slide1.jpg",
+            "images/slide2.jpg",
+            "images/slide3.jpg",
+            "images/slide4.jpg"
+        ];
+
+        let currentIndex = 0;
+        setInterval(() => {
+            currentIndex = (currentIndex + 1) % arr.length;
+            document.querySelector("img").src = arr[currentIndex];
+        }, 3000);
+    </script>
+
 </body>
 </html>
