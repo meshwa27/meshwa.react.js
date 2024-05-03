@@ -6,7 +6,7 @@
 }
 
 body {
-    background-color: whitesmoke;
+    background-color: black;
 }
 
 main {
@@ -21,18 +21,21 @@ main {
     height: 75vh;
     border-radius: 10px;
     display: flex;
-    box-shadow: 0px 0px 10px 5px lightgray;
+   
+    
     /* justify-content: start; */
     align-items: center;
     flex-direction: column;
-    background-color: #fff;
+    background-color: #c6b4b48f;
 }
 
 .main-container h1 {
     font-size: 35px;
     margin-top: 30px;
     margin-bottom: 10px;
+    transition: 0.10s;
 }
+
 
 .main-container h2 {
     margin: 15px 0;
@@ -45,7 +48,7 @@ main {
     height: 120px;
     background-color: #fff;
     border-radius: 5px;
-    border: 3px solid #1a73e8;
+    border: 3px ;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -57,13 +60,13 @@ main {
 
 .timer-container span {
     font-size: 20px;
-    color: #1a73e8;
+    color: black;
 }
 
 .start-pause_btns button {
     /* display: block; */
-    border: 2px solid #1a73e8;
-    background-color: #1a73e8;
+    border: 2px solid black;
+    background-color:  black;
     color: #fff;
     font-size: 13px;
     font-weight: 600;
@@ -75,7 +78,7 @@ main {
 
 .start-pause_btns button:hover {
     background-color: white;
-    color: #1a73e8;
+    color: black;
 }
 
 .quotes-slider {
