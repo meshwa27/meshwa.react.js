@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-image: url("https://c4.wallpaperflare.com/wallpaper/623/634/455/blurry-background-vi-wallpaper-preview.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+        }
+        h1 {
+            margin-bottom: 0%;
+            font-size: 55px;
+            font-weight: 900;
+            text-align: center;
+            color: white;
+            transition: 0.5s ease-in-out;
+        }
+        h1:hover {
+            color: black;
+        }
+        #container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+        }
+        .box {
+            display: flex;
+            border-radius: 30px;
+            border: 2px solid white;
+            background-color: rgba(255, 255, 255, 0.438);
+            margin: 45px 15px;
+        }
+        .box1 {
+            text-align: center;
+            padding: 40px 0;
+        }
+        .box2 {
+            height: 240px;
+        }
+        .box2 img {
+            border-top-left-radius: 30px;
+            border-bottom-left-radius: 30px;
+        }
+        p {
+            padding: 0 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>user data</h1>
+    <div id="container">
+    </div>
+    <script>
+        // Fetches user data from the API and processes it
+        function FecthApi() {
+            fetch('https://reqres.in/api/users?page=2')
+            .then((res) => res.json()) // Converts response to JSON
+            .then((data) => CardList(data.data)) // Passes user data to CardList function
+            .catch((err) => console.log(err)) // Logs any errors
+        }
+        FecthApi(); // Calls the function to fetch data
+
+        // Generates HTML for the list of user cards
+        function CardList(data) {
+            let store = data.map((el) => SignalCard(el.email, el.first_name, el.last_name, el.avatar));
+            document.querySelector('#container').innerHTML = store.join(''); // Updates the container with user cards
+            console.log(store); // Logs the generated HTML for debugging
+        }
+
+        // Creates a single user card's HTML
+        function SignalCard(email, first_name, last_name, avatar) {
+            return `
+                <div class="box">
+                    <div class="box2"><img src="${avatar}" height="240px" width="230px"></div>
+                    <div class="box1">
+                        <h2>First Name : ${first_name}</h2>
+                        <h2>Last Name : ${last_name}</h2>
+                        <p>Email : ${email}</p>
+                    </div>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>
