@@ -1,0 +1,3 @@
+deploy link url "https://add-to-cart-backend-it46.onrender.com/pitches"
+url"https://add-to-cart-backend-it46.onrender.com/cart"
+"add-to-cart-frontend1-jn3ctmu27-meshwa-patels-projects.vercel.app"

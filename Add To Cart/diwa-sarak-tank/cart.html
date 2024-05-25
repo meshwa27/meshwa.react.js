@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Product Card</title>
+<script src="main.js"></script>
+<link rel="stylesheet" href="style.css">
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+    }
+    h1 {
+        text-align: center;
+        margin-top: 20px;
+        color: #333;
+    }
+    #mainSection {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 20px;
+    }
+    .card {
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin: 20px;
+        width: 300px;
+        overflow: hidden;
+        transition: transform 0.3s, box-shadow 0.3s;
+        
+    }
+    .card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+    .card-img img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+    }
+    .card-body {
+        padding: 20px;
+        text-align: center;
+    }
+    .card-title {
+        font-size: 24px;
+        margin-bottom: 10px;
+        color: #333;
+    }
+    .card-founder,
+    .card-category,
+    .price {
+        font-size: 16px;
+        color: #777;
+        margin-bottom: 10px;
+    }
+    .card-link, .card-button {
+        display: inline-block;
+        margin-top: 10px;
+        padding: 10px 20px;
+        text-decoration: none;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    .card-link {
+        background-color: #33c3f0;
+        color: #fff;
+        transition: background-color 0.3s, color 0.3s;
+    }
+    .card-link:hover {
+        background-color: #fff;
+        color: #33c3f0;
+        border: 1px solid #33c3f0;
+    }
+    .card-button {
+        background-color: #e74c3c;
+        color: #fff;
+        transition: background-color 0.3s, color 0.3s;
+    }
+    .card-button:hover {
+        background-color: #fff;
+        color: #e74c3c;
+        border: 1px solid #e74c3c;
+    }
+</style>
+
+</head>
+<body>
+
+    <h1>this is cart page</h1>
+    <div id="mainSection"></div>
+ 
+</body>
+</html>
+<script>
+    function Fetchdata() {
+    fetch("https://add-to-cart-backend-it46.onrender.com/cart")
+        .then((res) => res.json())
+        .then((data) =>{
+        console.log("fetched data:",data);
+            cardlist(data);
+            
+        } )
+        .catch((err) => console.log(err));
+}
+
+Fetchdata();
+
+function cardlist(data) {
+    const store = data.map((el) => 
+    card(el.id, el.image, el.title, el.price, el.founder, el.category,el.description)
+);
+const mainSection=document.getElementById("mainSection");
+mainSection.innerHTML=store.join("");
+   
+}
+
+function card(id, image, title, price, founder, category,description) {
+    let singlecard = `
+    <a href="description.html?title=${encodeURIComponent(title)}&image=${encodeURIComponent(image)}&price=${encodeURIComponent(price)}&founder=${encodeURIComponent(founder)}&category=${encodeURIComponent(category)}&id=${encodeURIComponent(id)}&description=${encodeURIComponent(description)}">
+    <div class="card" data-id="${id}">
+        <div class="card-img">
+            <img src="${image}" alt="">
+        </div>
+        <div class="card-body">
+            <h4 class="card-title">${title}</h4>
+            <p class="card-founder">Founder: ${founder}</p>
+            <p class="card-category">${category}</p>
+            <p class="price">${price}</p>
+            <a href="#" class="card-link" data-id="${id}">Edit</a>
+            <button class="card-button" data-id="${id}">Delete</button>
+        </div>
+    </div>
+    </a>
+    `;
+    return singlecard;
+}
+document.addEventListener("click", (e) => {
+    if (e.target.classList.contains("card-button")) {
+        delteproduct(e.target.dataset.id)
+    }
+
+})
+
+function delteproduct(id) {
+    fetch(`https://add-to-cart-backend-it46.onrender.com/pitches/${id}`, {
+        method: "DELETE"
+    }).then((res) => res.json)
+        .then((data) => {
+            alert("deleted...")
+            console.log(data)
+        })
+        .catch((err) => console.log(err))
+}
+
+</script>
+<script src="main.js"></script>
